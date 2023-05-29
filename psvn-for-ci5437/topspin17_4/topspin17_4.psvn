@@ -1,0 +1,29 @@
+# top spin of 12 numbers and you can rotate segments of 4 
+
+# number of state variables
+17
+
+# every variable is 12-valued 
+17N 17N 17N 17N 17N 17N 17N 17N 17N 17N 17N 17N 17N 17N 17N 17N 17N 
+
+# every movement is valid
+A B C D - - - - - - - - - - - - - => D B C A - - - - - - - - - - - - -  LABEL Rotate_1
+- A B C D - - - - - - - - - - - - => - D B C A - - - - - - - - - - - -  LABEL Rotate_2
+- - A B C D - - - - - - - - - - - => - - D B C A - - - - - - - - - - -  LABEL Rotate_3
+- - - A B C D - - - - - - - - - - => - - - D B C A - - - - - - - - - -  LABEL Rotate_4
+- - - - A B C D - - - - - - - - - => - - - - D B C A - - - - - - - - -  LABEL Rotate_5
+- - - - - A B C D - - - - - - - - => - - - - - D B C A - - - - - - - -  LABEL Rotate_6
+- - - - - - A B C D - - - - - - - => - - - - - - D B C A - - - - - - -  LABEL Rotate_7
+- - - - - - - A B C D - - - - - - => - - - - - - - D B C A - - - - - -  LABEL Rotate_8
+- - - - - - - - A B C D - - - - - => - - - - - - - - D B C A - - - - -  LABEL Rotate_9
+- - - - - - - - - A B C D - - - - => - - - - - - - - - D C B A - - - -  LABEL Rotate_10
+- - - - - - - - - - A B C D - - - => - - - - - - - - - - D C B A - - -  LABEL Rotate_11
+- - - - - - - - - - - A B C D - - => - - - - - - - - - - - D C B A - -  LABEL Rotate_12
+- - - - - - - - - - - - A B C D - => - - - - - - - - - - - - D C B A -  LABEL Rotate_13
+- - - - - - - - - - - - - A B C D => - - - - - - - - - - - - - D C B A  LABEL Rotate_14
+D - - - - - - - - - - - - - A B C => A - - - - - - - - - - - - - D C B  LABEL Rotate_15
+C D - - - - - - - - - - - - - A B => B A - - - - - - - - - - - - - D C  LABEL Rotate_16
+B C D - - - - - - - - - - - - - A => C B A - - - - - - - - - - - - - D  LABEL Rotate_17
+
+
+GOAL 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
