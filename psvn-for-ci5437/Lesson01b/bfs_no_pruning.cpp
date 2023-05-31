@@ -15,7 +15,8 @@ void bread_first_search(state_t *state) {
     queue<state_t> q; // fifo
     ruleid_iterator_t iter;
     clock_t start, end;
-    int ruleid, n_child; 
+    unsigned long int n_child;
+    int ruleid, elapsed; 
 
     // start counting the time
     start = clock();
@@ -33,11 +34,10 @@ void bread_first_search(state_t *state) {
             return;
         }
         */
-        init_fwd_iter(&iter, &curr_state);
+        init_bwd_iter(&iter, &curr_state);
         // loop over the successor of curr_state
-        printf("%d", next_ruleid(&iter));
         while ( (ruleid = next_ruleid(&iter)) >= 0) {
-            apply_fwd_rule(ruleid, &curr_state, &child_state);
+            apply_bwd_rule(ruleid, &curr_state, &child_state);
             q.push(child_state);
 
             n_child++;
@@ -45,11 +45,12 @@ void bread_first_search(state_t *state) {
 
         end = clock();
 
-        if ((end - start)/(double)CLOCKS_PER_SEC >= 60) {
-            printf("elapesed time: 60 s, nodes generated = %d \n", n_child);
+        elapsed = (end - start)/CLOCKS_PER_SEC;
+
+        if (elapsed >= 300.0) {
+            printf("elapesed time: 300 s, nodes generated = %ld \n", n_child);
             return;
         }
-
     }
 }
 
@@ -57,24 +58,11 @@ int main(int argc, char **argv) {
     char str[MAX_LINE_LENGTH+1];
     ssize_t nchars;
     state_t state_0;
-    clock_t start, end;
+    int goal_num;
 
-    // read a line from stdin
-    printf("Please enter a state followed by ENTER: ");
-    if( fgets(str, sizeof str, stdin) == NULL ) {
-        printf("Error: empty input line.\n");
-        return 0; 
-    }
-
-
-    // CONVERT THE STRING TO A STATE
-    nchars = read_state(str, &state_0);
-    if( nchars <= 0 ) {
-        printf("Error: invalid state entered.\n");
-        return 0; 
-    }
-
-    printf("The state you entered is: ");
+    first_goal_state(&state_0, &goal_num); // get first goal state
+    
+    printf("The goal state is: ");
     print_state(stdout, &state_0);
     printf("\n");
 
