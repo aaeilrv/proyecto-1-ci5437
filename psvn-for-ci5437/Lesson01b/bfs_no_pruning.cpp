@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <inttypes.h>
 #include <assert.h>
-#include <sys/time.h>
-#include <queue>
+#include <queue>    // queue library
+#include <ctime>
 #define  MAX_LINE_LENGTH 999 
 
 using namespace std;
@@ -14,37 +14,50 @@ void bread_first_search(state_t *state) {
     state_t curr_state, child_state; 
     queue<state_t> q; // fifo
     ruleid_iterator_t iter;
-    int ruleid, depth; // curr depth of the search
+    clock_t start, end;
+    int ruleid, n_child; 
 
-    depth = 0;
+    // start counting the time
+    start = clock();
     q.push(*state);
+    
+    n_child = 0;
 
     while (!q.empty()) {
         curr_state = q.front();
         q.pop();
 
+        /*
         if (is_goal(&curr_state)) {
-            printf("goal reached in depth = %d \n", depth);
+            printf("goal reached, nodes generated = %d \n", n_child);
             return;
         }
-
+        */
         init_fwd_iter(&iter, &curr_state);
         // loop over the successor of curr_state
+        printf("%d", next_ruleid(&iter));
         while ( (ruleid = next_ruleid(&iter)) >= 0) {
             apply_fwd_rule(ruleid, &curr_state, &child_state);
             q.push(child_state);
+
+            n_child++;
         }
 
-        depth++;
-    }
+        end = clock();
 
-    printf("goal is never reached");
+        if ((end - start)/(double)CLOCKS_PER_SEC >= 60) {
+            printf("elapesed time: 60 s, nodes generated = %d \n", n_child);
+            return;
+        }
+
+    }
 }
 
 int main(int argc, char **argv) {
     char str[MAX_LINE_LENGTH+1];
     ssize_t nchars;
     state_t state_0;
+    clock_t start, end;
 
     // read a line from stdin
     printf("Please enter a state followed by ENTER: ");
@@ -66,6 +79,5 @@ int main(int argc, char **argv) {
     printf("\n");
 
     bread_first_search(&state_0);
-
     
 }
