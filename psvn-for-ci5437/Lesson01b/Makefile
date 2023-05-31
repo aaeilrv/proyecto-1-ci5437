@@ -18,8 +18,8 @@ psvn2c_abstraction.c:
 
 .PRECIOUS: %.c
 
-%.succ: %.c ../global/succ.c
-	$(CC) $(OPT) ../global/succ.c -include $< -o $@
+%.bfs: %.c ./bfs_no_pruning.cpp
+	$(CXX) $(OPT) ./bfs_no_pruning.cpp -include $< -o $@
 	rm -f $*.c
 
 .PHONY: clean
