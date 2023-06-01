@@ -17,7 +17,7 @@ void bread_first_search(state_t *state) {
     clock_t start, end;
     unsigned long int n_child;
     float elapsed; 
-    int ruleid, expected; 
+    int ruleid, expected, hist; 
 
     // start counting the time
     start = clock();
@@ -25,6 +25,9 @@ void bread_first_search(state_t *state) {
     
     // initialize excepcted 
     expected = 1; // this variable is to show the elapsed time and the nodes genereated so far every 10 seconds
+
+    // initialize historial
+    hist = init_history;
 
     n_child = 0;
 
@@ -35,7 +38,12 @@ void bread_first_search(state_t *state) {
         init_bwd_iter(&iter, &curr_state);
         // loop over the successor of curr_state
         while ( (ruleid = next_ruleid(&iter)) >= 0) {
+            
+            // if the ruleid should not be aplied
+            if (bwd_rule_valid_for_history(hist, ruleid) == 0) continue;
+            
             apply_bwd_rule(ruleid, &curr_state, &child_state);
+            hist = next_bwd_history(hist, ruleid);
             q.push(child_state);
 
             n_child++;
