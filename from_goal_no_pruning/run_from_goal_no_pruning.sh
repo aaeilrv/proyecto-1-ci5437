@@ -1,7 +1,14 @@
 #!bin/bash
 
-#./15_puzzle.from_goal_no_pruning
-#./24_puzzle.from_goal_no_pruning
+echo "\nrunning rubik3"
+./rubik3.from_goal_no_pruning
+
+echo "running 15_puzzle"
+./15_puzzle.from_goal_no_pruning
+
+echo "running 24_puzzle"
+./24_puzzle.from_goal_no_pruning
+
 echo "\nrunning hanoi4_12"
 ./hanoi4_12.from_goal_no_pruning
 
