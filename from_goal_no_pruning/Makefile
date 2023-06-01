@@ -18,7 +18,7 @@ psvn2c_abstraction.c:
 
 .PRECIOUS: %.c
 
-%.from_goal_no_pruning: %.c ../algorithms/bfs.cpp
+%.from_goal_no_pruning: %.c
 	$(CXX) $(OPT) ../algorithms/bfs.cpp -include $< -o $@
 	rm -f $*.c
 

@@ -1,0 +1,60 @@
+
+running hanoi4_12
+The goal state is: 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 
+elapsed time: 10.000001 s, nodes generated = 23367974 
+elapsed time: 20.000002 s, nodes generated = 46066592 
+elapsed time: 30.000000 s, nodes generated = 69975638 
+elapsed time: 40.000000 s, nodes generated = 93282054 
+elapsed time: 50.000000 s, nodes generated = 116515492 
+elapsed time: 60.000000 s, nodes generated = 141110084 
+nodes generated per second = 2351834.750000
+
+running hanoi4_14
+The goal state is: 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 
+elapsed time: 10.000001 s, nodes generated = 23798469 
+elapsed time: 20.000002 s, nodes generated = 47621544 
+elapsed time: 30.000000 s, nodes generated = 71465349 
+elapsed time: 40.000000 s, nodes generated = 95357854 
+elapsed time: 50.000000 s, nodes generated = 119149274 
+elapsed time: 60.000000 s, nodes generated = 142634487 
+nodes generated per second = 2377241.250000
+
+running hanoi4_17
+The goal state is: 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 
+elapsed time: 10.000006 s, nodes generated = 22353876 
+elapsed time: 20.000000 s, nodes generated = 45079924 
+elapsed time: 30.000002 s, nodes generated = 67724382 
+elapsed time: 40.000000 s, nodes generated = 90713984 
+elapsed time: 50.000000 s, nodes generated = 113309276 
+elapsed time: 60.000000 s, nodes generated = 135241730 
+nodes generated per second = 2254028.750000
+
+running topspin12_4
+The goal state is: 1 2 3 4 5 6 7 8 9 10 11 12 
+elapsed time: 10.000001 s, nodes generated = 55473696 
+elapsed time: 20.000000 s, nodes generated = 110801016 
+elapsed time: 30.000004 s, nodes generated = 166226304 
+elapsed time: 40.000000 s, nodes generated = 221587116 
+elapsed time: 50.000000 s, nodes generated = 276508152 
+elapsed time: 60.000000 s, nodes generated = 329286180 
+nodes generated per second = 5488103.000000
+
+running topspin14_4
+The goal state is: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 
+elapsed time: 10.000000 s, nodes generated = 57290604 
+elapsed time: 20.000002 s, nodes generated = 117369560 
+elapsed time: 30.000002 s, nodes generated = 177066246 
+elapsed time: 40.000000 s, nodes generated = 236487146 
+elapsed time: 50.000004 s, nodes generated = 298231318 
+elapsed time: 60.000000 s, nodes generated = 360243324 
+nodes generated per second = 6004055.500000
+
+running topspin17_4
+The goal state is: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+elapsed time: 10.000000 s, nodes generated = 68506566 
+elapsed time: 20.000002 s, nodes generated = 137218203 
+elapsed time: 30.000000 s, nodes generated = 205943474 
+elapsed time: 40.000000 s, nodes generated = 274176204 
+elapsed time: 50.000000 s, nodes generated = 343222979 
+elapsed time: 60.000000 s, nodes generated = 410750617 
+nodes generated per second = 6845843.500000
