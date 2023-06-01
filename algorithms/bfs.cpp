@@ -16,24 +16,22 @@ void bread_first_search(state_t *state) {
     ruleid_iterator_t iter;
     clock_t start, end;
     unsigned long int n_child;
-    int ruleid, elapsed; 
+    float elapsed; 
+    int ruleid, expected; 
 
     // start counting the time
     start = clock();
     q.push(*state);
     
+    // initialize excepcted 
+    expected = 1; // this variable is to show the elapsed time and the nodes genereated so far every 10 seconds
+
     n_child = 0;
 
     while (!q.empty()) {
         curr_state = q.front();
         q.pop();
 
-        /*
-        if (is_goal(&curr_state)) {
-            printf("goal reached, nodes generated = %d \n", n_child);
-            return;
-        }
-        */
         init_bwd_iter(&iter, &curr_state);
         // loop over the successor of curr_state
         while ( (ruleid = next_ruleid(&iter)) >= 0) {
@@ -45,10 +43,16 @@ void bread_first_search(state_t *state) {
 
         end = clock();
 
-        elapsed = (end - start)/CLOCKS_PER_SEC;
+        elapsed = (end - start)/(double)CLOCKS_PER_SEC;
 
-        if (elapsed >= 300.0) {
-            printf("elapesed time: 300 s, nodes generated = %ld \n", n_child);
+        // show elapsed time every 10 seconds
+        if ((int)elapsed / 10 == expected) {
+            printf("elapsed time: %f s, nodes generated = %ld \n", elapsed, n_child);
+            expected++;
+        }
+
+        if (elapsed >= 60) {
+            printf("nodes generated per second = %f\n", n_child/elapsed);
             return;
         }
     }
