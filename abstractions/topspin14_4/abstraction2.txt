@@ -1,0 +1,7 @@
+map 12N 2 1
+map 12N 4 1
+map 12N 6 1
+map 12N 8 1
+map 12N 10 1
+map 12N 12 1
+map 12N 14 1
