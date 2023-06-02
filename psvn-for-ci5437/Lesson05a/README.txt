@@ -25,4 +25,3 @@ para un estado, hacer:
 
 donde abst es un apuntador a abstraction_t, y pdb
 es un apuntador a state_map_t.
-
