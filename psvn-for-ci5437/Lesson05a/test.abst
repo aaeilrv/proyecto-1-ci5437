@@ -1,4 +1,4 @@
 abstraction {
   2 { 0 1 }
-  projection { K K P P K K P P K K P P K K P P K K P P K K P P K K P P K K P P K K P P K K P P K K P P K K P P K K P P K K P P }
+  projection { P P P P K K K K P P P P K K K K P P P P K K K K P P P P K K K K P P P P K K K K P P P P K K K K P P P P K K K K P P P P K K K K P P P P }
 }
