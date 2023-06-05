@@ -1,0 +1,32 @@
+# This file was created by the abstractor program.
+# The source PSVN file was: hanoi3_5d.psvn
+# The abstraction used is stored in file: abs2.abst
+
+12
+12 12 12 12 1 1 1 1 12 12 12 12
+
+A B C D - - - - - - - - => D C B A - - - - - - - - LABEL ROTATE_1 COST 1
+- A B C - - - - - - - - => - D C B - - - - - - - - LABEL ROTATE_2 COST 1
+- - A B - - - - - - - - => - - D C - - - - - - - - LABEL ROTATE_3 COST 1
+- - - A - - - - - - - - => - - - D - - - - - - - - LABEL ROTATE_4 COST 1
+- - - - - - - - - - - - => - - - - - - - - - - - - LABEL ROTATE_5 COST 1
+- - - - - - - - D - - - => - - - - - - - - A - - - LABEL ROTATE_6 COST 1
+- - - - - - - - C D - - => - - - - - - - - B A - - LABEL ROTATE_7 COST 1
+- - - - - - - - B C D - => - - - - - - - - C B A - LABEL ROTATE_8 COST 1
+- - - - - - - - A B C D => - - - - - - - - D C B A LABEL ROTATE_9 COST 1
+D - - - - - - - - A B C => A - - - - - - - - D C B LABEL ROTATE_10 COST 1
+C D - - - - - - - - A B => B A - - - - - - - - D C LABEL ROTATE_11 COST 1
+B C D - - - - - - - - A => C B A - - - - - - - - D LABEL ROTATE_12 COST 1
+
+GOAL 0 1 2 3 - - - - 8 9 10 11
+GOAL 11 0 1 2 - - - - 7 8 9 10
+GOAL 10 11 0 1 - - - - 6 7 8 9
+GOAL 9 10 11 0 - - - - 5 6 7 8
+GOAL 8 9 10 11 - - - - 4 5 6 7
+GOAL 7 8 9 10 - - - - 3 4 5 6
+GOAL 6 7 8 9 - - - - 2 3 4 5
+GOAL 5 6 7 8 - - - - 1 2 3 4
+GOAL 4 5 6 7 - - - - 0 1 2 3
+GOAL 3 4 5 6 - - - - 11 0 1 2
+GOAL 2 3 4 5 - - - - 10 11 0 1
+GOAL 1 2 3 4 - - - - 9 10 11 0
