@@ -21,9 +21,10 @@ void a_star(state_t *state) {
     unsigned long int n_nodes;
     int priority, ruleid, *curr_cost, child_cost;
 
+
     p.Add(0, 0, *state);
     state_map_add(visited, state, 0); // we already visit the initial state
-    n_nodes++;
+    n_nodes = 0;
 
     while (!p.Empty()) {
         priority = p.CurrentPriority();
@@ -34,7 +35,7 @@ void a_star(state_t *state) {
 
         curr_cost = state_map_get(visited, &curr_state); // if curr state was visited before, curr_cost == null
 
-        if (curr_cost == nullptr) {
+        if (curr_cost != nullptr) {
             /* stop iteration if curr state is goal state*/
             if (is_goal(&curr_state)) {
                 printf("goal reached at depth %d - nodes generated %lu", priority, n_nodes);
