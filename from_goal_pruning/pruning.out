@@ -8,6 +8,7 @@ elapsed time: 40.000000 s, nodes generated = 82056891
 elapsed time: 50.000000 s, nodes generated = 103359396 
 elapsed time: 60.000000 s, nodes generated = 124970191 
 nodes generated per second = 2082836.500000
+
 running 15_puzzle
 The goal state is: B 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 
 elapsed time: 10.000000 s, nodes generated = 5169576 

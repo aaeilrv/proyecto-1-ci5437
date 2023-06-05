@@ -1,7 +1,7 @@
 #!bin/bash
 
 make 15_puzzle.from_goal_no_pruning
-#make 24_puzzle.from_goal_no_pruning
+make 24_puzzle.from_goal_no_pruning
 make hanoi4_12.from_goal_no_pruning
 make hanoi4_14.from_goal_no_pruning
 make hanoi4_17.from_goal_no_pruning
