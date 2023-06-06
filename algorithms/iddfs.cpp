@@ -15,7 +15,7 @@ void bounded_dfs_visit(state_t state, int curr_depth, int max_depth, unsigned lo
     ruleid_iterator_t iter;
     int ruleid;
     
-    if (curr_depth>=max_depth) {
+    if (curr_depth>max_depth) {
         return;
     }
 
@@ -28,7 +28,7 @@ void bounded_dfs_visit(state_t state, int curr_depth, int max_depth, unsigned lo
         bounded_dfs_visit(child_state, curr_depth+1, max_depth, nodes);
     }
 
-    return ;
+    return;
 }
 
 void iddfs(state_t state) {
