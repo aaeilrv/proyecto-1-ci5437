@@ -18,6 +18,7 @@
 using namespace std;
 
 
+
 pair<state_t*, int> f_bounded_dfs_visit(state_t n, unsigned long int bound) {
     // base cases
     int f = n.g + h(n.state);
@@ -40,8 +41,9 @@ pair<state_t*, int> f_bounded_dfs_visit(state_t n, unsigned long int bound) {
             return p;
         }
 
-        t = min(t, p.second);
-
+        if (t > p.second) {
+            t = p.second;
+        }
     }
 
     return make_pair(nullptr, t);
@@ -56,7 +58,7 @@ int main(int argc, char **argv) {
     char state_str[MAX_STR_LEN + 1];
     ssize_t nchars;
     state_t init_state;
-    unsigned long int bound = h(init_state);
+    unsigned long int bound = heuristic(init_state);
 
     // read
     printf("enter init state: ");
