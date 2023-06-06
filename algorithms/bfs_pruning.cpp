@@ -13,14 +13,16 @@ using namespace std;
 void bread_first_search(state_t *state) {
     state_t curr_state, child_state; 
     queue<state_t> q; // fifo
+    queue<int> q_hist; // top is hist for top of state queue
     ruleid_iterator_t iter;
     unsigned long int n_child, n_child_at_depth;
     int ruleid, hist, curr_depth = 0; 
 
-    q.push(*state);
-    
     // initialize historial
     hist = init_history;
+    
+    q_hist.push(hist);
+    q.push(*state);
 
 
     while (!q.empty()) {
@@ -31,15 +33,18 @@ void bread_first_search(state_t *state) {
             curr_state = q.front();
             q.pop();
 
+            hist = q_hist.front();
+            q_hist.pop();
+
             // loop over the successor of curr_state
             init_bwd_iter(&iter, &curr_state);
             while ( (ruleid = next_ruleid(&iter)) >= 0) {
-                hist = next_bwd_history(hist, ruleid);
                 // if the ruleid should not be aplied
-                if (bwd_rule_valid_for_history(hist, ruleid) == 0) continue;
+                if (bwd_rule_valid_for_history(hist, ruleid)==0) continue;
                 
                 apply_bwd_rule(ruleid, &curr_state, &child_state);
                 q.push(child_state);
+                q_hist.push(next_bwd_history(hist, ruleid));
 
                 n_child++;
             }
