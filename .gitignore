@@ -1,1 +1,5 @@
 *.pdb
+*.from_goal_no_pruning
+*.from_goal_pruning
+*.a_star
+*.abst
