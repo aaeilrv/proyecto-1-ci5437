@@ -19,7 +19,7 @@ psvn2c_abstraction.c:
 .PRECIOUS: %.c
 
 %.from_goal_pruning: %.c
-	$(CXX) $(OPT) ../algorithms/iddfs_pruning.cpp -include $< -o $@
+	$(CXX) $(OPT) ../algorithms/bfs_pruning.cpp -include $< -o $@
 	rm -f $*.c
 
 .PHONY: clean

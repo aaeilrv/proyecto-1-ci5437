@@ -19,12 +19,12 @@ void bread_first_search(state_t *state) {
     while (!q.empty()) {
         n_child_at_depth = q.size();
         n_child = 0;
-
-
-        // loop over the successor of curr_state
+        
         for (int i = 0; i < n_child_at_depth; i++) {
             curr_state = q.front();
             q.pop();
+    
+            // loop over the successor of curr_state
             init_bwd_iter(&iter, &curr_state);
             while ((ruleid = next_ruleid(&iter)) >= 0) {
                 apply_bwd_rule(ruleid, &curr_state, &child_state);

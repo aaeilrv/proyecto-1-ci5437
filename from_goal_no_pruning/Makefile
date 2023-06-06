@@ -19,13 +19,9 @@ psvn2c_abstraction.c:
 .PRECIOUS: %.c
 
 %.from_goal_no_pruning: %.c
-	$(CXX) $(OPT) ../algorithms/iddfs.cpp -include $< -o $@
-	rm -f $*.c
-
-%.bfs: %.c
 	$(CXX) $(OPT) ../algorithms/bfs.cpp -include $< -o $@
 	rm -f $*.c
-	
+
 .PHONY: clean
 clean:
 	rm -fr *.from_goal_no_pruning *.bfs psvn2c_core.c psvn2c_state_map.c psvn2c_abstraction.c *.dSYM *.o *~ *.c
