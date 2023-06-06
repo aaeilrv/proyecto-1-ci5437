@@ -14,17 +14,16 @@ void bounded_dfs_visit(state_t state, int curr_depth, int max_depth, unsigned lo
     state_t child_state;
     ruleid_iterator_t iter;
     int ruleid;
-    
+
     if (curr_depth>max_depth) {
         return;
     }
 
     init_bwd_iter(&iter, &state);
-
     // loop over the successor of state
     while ((ruleid = next_ruleid(&iter)) >= 0) {
         apply_bwd_rule(ruleid, &state, &child_state);
-        *nodes = *nodes + 1;
+        (*nodes)++;
         bounded_dfs_visit(child_state, curr_depth+1, max_depth, nodes);
     }
 
@@ -36,9 +35,8 @@ void iddfs(state_t state) {
     unsigned long int n_nodes;
     
     depth = 0;
-    n_nodes = 0;
-    while (1) {
-        
+    while (depth <= 2) {
+        n_nodes = 0;
         bounded_dfs_visit(state, 0, depth, &n_nodes);
 
         printf("depth: %d. nodes %ld\n", depth, n_nodes);

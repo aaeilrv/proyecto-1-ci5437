@@ -12,58 +12,64 @@
         - Hanoi: max of differentes PDB's
 */
 #include <string>
+#include <iostream>
+using namespace std;
 
 class heuristics {
-    char *problem
-    int arr_15_puzzle_rows[16];
-    int arr_15_puzzle_cols[16];
-
-    void init_heuristic(char *p) {
-        problem = p;
-        
-
-        if (strcmp(problem, "15_puzzle_manhatan") == 0) {
-            // fill the rows and cols arrays
-            for (int i = 0; i < 16; i++) {
-                arr_15_puzzle_rows[i] = div(i, 4).quot()
-                arr_15_puzzle_rows[i] = i % 4;
-            }
-        }
-        /*
-            some code to manipulate the abs
-        */
-    }
+    char *problem;
+    abstraction_t *abs1, *abs2;
+    state_map_t *map1, *map2;
 
     public:
         heuristics() {};
+        void init_heuristic() {
+            FILE *file;
 
-        int get_15_puzzle_manhatan_heuristic(state_t *state) {
-            int heuristic = 0, size = 4;
-            // value of each variable in the state
-            var_t *arr = state->vars
-            int num, dist, x, y;
-
-            for (int i = 0; i < size*size; i++) {
-                num = (int) arr[i];
-
-                y = i % size;
-
-                if (y % size == 0) x++;
-                if (num == 0) continue;
-
-                dist = abs(x-arr_15_puzzle_rows[num]) + abs(y-arr_15_puzzle_cols[num])
-                heuristic += dist;
+            abs1 = read_abstraction_from_file("abs1.abst");
+            if (abs1 == nullptr) {
+                cout << "file abs1.abst not found" << endl;
+                return;
+            }
+            
+            abs2 = read_abstraction_from_file("abs2.abst");
+            if (abs2 == nullptr) {
+                cout << "file abs2.abst not found" << endl;
+                return;
             }
 
-            return heuristic;
+            file = fopen("abs1.pdb", "r");
+            if (file == nullptr) {
+                cout << "file abs1.pdb not found" << endl;
+                return;
+            }
+            map1 = read_state_map(file);
+            fclose(file);
+
+            file = fopen("abs2.pdb", "r");
+            if (file == nullptr) {
+                cout << "file abs2.pdb not found" << endl;
+                return;
+            }
+            map2 = read_state_map(file);
+            fclose(file);
         }
 
 
-        int get_heuristic(state_t *state) {
-            if (strcmp(problem, "15_puzzle_manhatan") == 0) {
-                return get_15_puzzle_manhatan_heuristic(state);
-            }
+        int top_spin(state_t *state) {
+            state_t *abs_state = new state_t;
+            int h1, h2;
 
-            return -1;
+            abstract_state(abs1, state, abs_state);
+            h1 = *state_map_get(map1, abs_state);
+
+            abstract_state(abs2, state, abs_state);
+            h2 = *state_map_get(map2, abs_state);
+
+            return max(h1, h2);
         }
-}
+
+        void destroy_heuristic() {
+            destroy_state_map(map1);
+            destroy_state_map(map2);
+        }
+};
