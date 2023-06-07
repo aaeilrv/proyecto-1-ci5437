@@ -1,4 +1,4 @@
 abstraction {
-  12 { 0 0 2 0 4 0 6 0 8 0 10 0 }
-  projection { K K K K K K K K K K K K }
+  TILE { B B B 4 B 5 B B 8 9 B B 12 B B B }
+  projection { K K K K K K K K K K K K K K K K }
 }

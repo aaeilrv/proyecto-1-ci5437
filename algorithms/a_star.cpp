@@ -19,16 +19,18 @@ void a_star(state_t *state) {
     ruleid_iterator_t iter;
     state_map_t *visited;
     state_t curr_state, child_state;
-    heuristics h;
+    heuristics_t h;
     unsigned long int n_nodes;
     int priority, ruleid, *curr_cost, h_value;
     
     p.Add(0, 0, *state);
+    h.init_heuristic("15_puzzle");
+    
     visited = new_state_map();
     state_map_add(visited, state, 0); // we already visit the initial state
+    
     n_nodes = 0;
-    h.init_heuristic();
-
+    
     while (!p.Empty()) {
         priority = p.CurrentPriority();
         curr_state = p.Top();
@@ -53,7 +55,7 @@ void a_star(state_t *state) {
             init_fwd_iter(&iter, &curr_state);
             while((ruleid = next_ruleid(&iter)) >= 0) {
                 apply_fwd_rule(ruleid, &curr_state, &child_state);
-                h_value = h.top_spin(&child_state);
+                h_value = h.get_heuristic(&child_state);
                 if (h_value < INT_MAX) {
                     state_map_add(visited, &child_state, priority+get_fwd_rule_cost(ruleid)+h_value);
                     p.Add(priority+get_fwd_rule_cost(ruleid)+h_value, priority+get_fwd_rule_cost(ruleid)+h_value, child_state);
@@ -72,7 +74,7 @@ int main(int argc, char **argv) {
     ssize_t nchars;
     state_t init_state;
     
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 1; i++) {
         // read
         if ( fgets(state_str, sizeof state_str, stdin) == NULL) {
             printf("error: empty input line\n");

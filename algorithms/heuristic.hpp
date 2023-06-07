@@ -11,7 +11,7 @@
         - Top spin: max of differents PDB's
         - Hanoi: max of differentes PDB's
 */
-#include <string>
+#include <string.h>
 #include <iostream>
 using namespace std;
 
@@ -21,7 +21,7 @@ class heuristics_t {
     state_map_t *map1, *map2, *map3, *map4, *map5;
 
     public:
-        heuristics() {};
+        heuristics_t() {};
         void init_heuristic(char *p) {
             problem = p;
             FILE *file;
@@ -30,7 +30,7 @@ class heuristics_t {
                 read abstraction and pdbs depending on the problem
             */
 
-            if (problem != '15_puzzle_manhattan') {
+            if (strcmp(problem,"15_puzzle_manhattan") != 0) {
                 
                 /*
                     every puzzle have at least 2 abstractions
@@ -66,9 +66,9 @@ class heuristics_t {
                 /*
                     check for puzzles that have at least 3 abstractions
                 */
-                if (problem == '15_puzzle' || problem == '24_puzzles') {
+                if (strcmp(problem, "15_puzzle")==0 || strcmp(problem, "24_puzzles")==0) {
                     abs3 = read_abstraction_from_file("abs3.abst");
-                    if (abs1 == nullptr) {
+                    if (abs3 == nullptr) {
                         cout << "file abs3.abst not found" << endl;
                         return;
                     }
@@ -82,10 +82,10 @@ class heuristics_t {
                     fclose(file);
                 }
 
-                if (problem == '24_puzzle') {
+                if (strcmp(problem, "24_puzzle")==0) {
                     abs4 = read_abstraction_from_file("abs4.abst");
-                    if (abs1 == nullptr) {
-                        cout << "file abs3.abst not found" << endl;
+                    if (abs4 == nullptr) {
+                        cout << "file abs4.abst not found" << endl;
                         return;
                     }
 
@@ -98,7 +98,7 @@ class heuristics_t {
                     fclose(file);
 
                     abs5 = read_abstraction_from_file("abs5.abst");
-                    if (abs1 == nullptr) {
+                    if (abs5 == nullptr) {
                         cout << "file abs5.abst not found" << endl;
                         return;
                     }
@@ -113,7 +113,6 @@ class heuristics_t {
                 }
             }
         }
-
 
         int top_spin(state_t *state) {
             state_t *abs_state = new state_t;
@@ -200,23 +199,23 @@ class heuristics_t {
         }
 
         int get_heuristic(state_t *state) {
-            if (problem == "hanoi4_12" || problem == "hanoi4_14" || problem == "hanoi4_17") {
+            if (strcmp(problem, "hanoi4_12")==0 || strcmp(problem, "hanoi4_14")==0 || strcmp(problem, "hanoi4_17")==0) {
                 return hanoi(state);
             }
 
-            if (problem == "topspin12_4" || problem == "topspin14_4" || problem == "topspin17_4") {
+            if (strcmp(problem, "topspin12_4")==0 || strcmp(problem, "topspin14_4")==0 || strcmp(problem, "topspin17_4")==0) {
                 return top_spin(state);
             }
 
-            if (problem == "15_puzzle_manhattan") {
+            if (strcmp(problem, "15_puzzle_manhattan")==0) {
                 return puzzle15_manhattan(state);
             }
 
-            if (problem == "15_puzzle") {
+            if (strcmp(problem, "15_puzzle")==0) {
                 return puzzle15(state);
             }
 
-            if (problem == "24_puzzle") {
+            if (strcmp(problem, "24_puzzle")==0) {
                 return puzzle24(state);
             }
 
@@ -229,5 +228,5 @@ class heuristics_t {
             destroy_state_map(map3);
             destroy_state_map(map4);
             destroy_state_map(map5);
-        }
+        };
 };
