@@ -72,7 +72,7 @@ class heuristics_t {
                 /*
                     check for puzzles that have at least 3 abstractions
                 */
-                if (strcmp(problem, "15_puzzle")==0 || strcmp(problem, "24_puzzles")==0 || strcmp(problem, "topspin12_4")==0) {
+                if (strcmp(problem, "15_puzzle")==0 || strcmp(problem, "24_puzzles")==0 || strcmp(problem, "topspin12_4")==0 || strcmp(problem, "topspin14_4")==0) {
                     abs3 = read_abstraction_from_file("abst3.abst");
                     if (abs3 == nullptr) {
                         cout << "file abst3.abst not found" << endl;
@@ -88,7 +88,10 @@ class heuristics_t {
                     fclose(file);
                 }
 
-                if (strcmp(problem, "24_puzzle")==0) {
+                /*
+                    check for puzzles that have at least 4 abstracoins
+                */
+                if (strcmp(problem, "24_puzzle")==0 || strcmp(problem, "topspin14_4")==0) {
                     abs4 = read_abstraction_from_file("abst4.abst");
                     if (abs4 == nullptr) {
                         cout << "file abst4.abst not found" << endl;
@@ -102,7 +105,9 @@ class heuristics_t {
                     }
                     map4 = read_state_map(file);
                     fclose(file);
+                }
 
+                if (strcmp(problem, "24_puzzle")==0){
                     abs5 = read_abstraction_from_file("abst5.abst");
                     if (abs5 == nullptr) {
                         cout << "file abst5.abst not found" << endl;
@@ -122,7 +127,7 @@ class heuristics_t {
 
         int top_spin(state_t *state) {
             state_t *abs_state = new state_t;
-            int h1, h2, h3;
+            int h1, h2, h3, h4;
 
             abstract_state(abs1, state, abs_state);
             h1 = *state_map_get(map1, abs_state);
@@ -133,6 +138,12 @@ class heuristics_t {
             abstract_state(abs3, state, abs_state);
             h3 = *state_map_get(map3, abs_state);
             
+            if (strcmp(problem, "topspin14_4")==0) {
+                abstract_state(abs4, state, abs_state);
+                h4 = *state_map_get(map4, abs_state);
+
+                return max(max(h1, h2), max(h3, h4));
+            }
             return max(h1, max(h2, h3));
         }
 

@@ -148,15 +148,25 @@ topspin14_4.a_star: topspin14_4.c abstractor
 	@cp ../puzzles/topspin14_4.psvn ./topspin14_4.psvn
 	@cp ../abstractions/topspin14_4/abst1.txt ./abst1.txt
 	@cp ../abstractions/topspin14_4/abst2.txt ./abst2.txt
+	@cp ../abstractions/topspin14_4/abst3.txt ./abst3.txt
+	@cp ../abstractions/topspin14_4/abst4.txt ./abst4.txt
 
 	@./abstractor topspin14_4.psvn abst1 < abst1.txt > /dev/null
 	@./abstractor topspin14_4.psvn abst2 < abst2.txt > /dev/null
+	@./abstractor topspin14_4.psvn abst3 < abst3.txt > /dev/null
+	@./abstractor topspin14_4.psvn abst4 < abst4.txt > /dev/null
 
 	@make abst1.distSummary
 	@./abst1.distSummary abst1.pdb
 
 	@make abst2.distSummary
 	@./abst2.distSummary abst2.pdb
+
+	@make abst3.distSummary
+	@./abst3.distSummary abst3.pdb
+
+	@make abst4.distSummary
+	@./abst4.distSummary abst4.pdb	
 
 	$(CXX) $(OPT) ../algorithms/a_star.cpp -include $< -o $@
 	@rm -f *.distSummary *.psvn *.txt *.c

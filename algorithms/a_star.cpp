@@ -60,6 +60,7 @@ void a_star(state_t *state) {
             }
         }
     }
+    p.Clear();
     destroy_state_map(visited);
     printf("goal never reached, max depth %d - nodes generated %lu", priority, n_nodes);
 }
@@ -69,7 +70,7 @@ int main(int argc, char **argv) {
     ssize_t nchars;
     state_t init_state;
 
-    h.init_heuristic("topspin12_4");
+    h.init_heuristic("topspin14_4");
     
     for (int i = 0; i < 10; i++) {
         // read state from std input
