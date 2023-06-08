@@ -10,21 +10,19 @@
 #include "priority_queue.hpp"
 #include "heuristic.hpp"
 #define MAX_STR_LEN 999
-
-
 using namespace std;
+
+heuristics_t h;
 
 void a_star(state_t *state) {
     PriorityQueue<state_t> p;
     ruleid_iterator_t iter;
     state_map_t *visited;
     state_t curr_state, child_state;
-    heuristics_t h;
     unsigned long int n_nodes;
     int priority, ruleid, *curr_cost, h_value;
     
     p.Add(0, 0, *state);
-    h.init_heuristic("15_puzzle");
     
     visited = new_state_map();
     state_map_add(visited, state, 0); // we already visit the initial state
@@ -44,7 +42,6 @@ void a_star(state_t *state) {
             /* stop iteration if curr state is goal state*/
             if (is_goal(&curr_state)) {
                 printf("goal reached at depth %d - nodes generated %lu\n", priority, n_nodes);
-                h.destroy_heuristic();
                 destroy_state_map(visited);
                 return;
             }
@@ -63,8 +60,6 @@ void a_star(state_t *state) {
             }
         }
     }
-
-    h.destroy_heuristic();
     destroy_state_map(visited);
     printf("goal never reached, max depth %d - nodes generated %lu", priority, n_nodes);
 }
@@ -73,8 +68,10 @@ int main(int argc, char **argv) {
     char state_str[MAX_STR_LEN+1];
     ssize_t nchars;
     state_t init_state;
+
+    h.init_heuristic("hanoi4_12");
     
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 10; i++) {
         // read
         if ( fgets(state_str, sizeof state_str, stdin) == NULL) {
             printf("error: empty input line\n");
@@ -89,4 +86,5 @@ int main(int argc, char **argv) {
 
         a_star(&init_state);
     }
+    h.destroy_heuristic();
 }

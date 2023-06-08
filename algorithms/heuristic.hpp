@@ -26,6 +26,12 @@ class heuristics_t {
             problem = p;
             FILE *file;
 
+            map1 = new state_map_t;
+            map2 = new state_map_t;
+            map3 = new state_map_t;
+            map4 = new state_map_t;
+            map5 = new state_map_t;
+
             /*
                 read abstraction and pdbs depending on the problem
             */
@@ -35,29 +41,29 @@ class heuristics_t {
                 /*
                     every puzzle have at least 2 abstractions
                 */
-                abs1 = read_abstraction_from_file("abs1.abst");
+                abs1 = read_abstraction_from_file("abst1.abst");
                 if (abs1 == nullptr) {
-                    cout << "file abs1.abst not found" << endl;
+                    cout << "file abst1.abst not found" << endl;
                     return;
                 }
                 
-                abs2 = read_abstraction_from_file("abs2.abst");
+                abs2 = read_abstraction_from_file("abst2.abst");
                 if (abs2 == nullptr) {
-                    cout << "file abs2.abst not found" << endl;
+                    cout << "file abst2.abst not found" << endl;
                     return;
                 }
 
-                file = fopen("abs1.pdb", "r");
+                file = fopen("abst1.pdb", "r");
                 if (file == nullptr) {
-                    cout << "file abs1.pdb not found" << endl;
+                    cout << "file abst1.pdb not found" << endl;
                     return;
                 }
                 map1 = read_state_map(file);
                 fclose(file);
 
-                file = fopen("abs2.pdb", "r");
+                file = fopen("abst2.pdb", "r");
                 if (file == nullptr) {
-                    cout << "file abs2.pdb not found" << endl;
+                    cout << "file abst2.pdb not found" << endl;
                     return;
                 }
                 map2 = read_state_map(file);
@@ -67,15 +73,15 @@ class heuristics_t {
                     check for puzzles that have at least 3 abstractions
                 */
                 if (strcmp(problem, "15_puzzle")==0 || strcmp(problem, "24_puzzles")==0) {
-                    abs3 = read_abstraction_from_file("abs3.abst");
+                    abs3 = read_abstraction_from_file("abst3.abst");
                     if (abs3 == nullptr) {
-                        cout << "file abs3.abst not found" << endl;
+                        cout << "file abst3.abst not found" << endl;
                         return;
                     }
 
-                    file = fopen("abs3.pdb", "r");
+                    file = fopen("abst3.pdb", "r");
                     if (file == nullptr) {
-                        cout << "file abs3.pdb not found" << endl;
+                        cout << "file abst3.pdb not found" << endl;
                         return;
                     }
                     map3 = read_state_map(file);
@@ -83,29 +89,29 @@ class heuristics_t {
                 }
 
                 if (strcmp(problem, "24_puzzle")==0) {
-                    abs4 = read_abstraction_from_file("abs4.abst");
+                    abs4 = read_abstraction_from_file("abst4.abst");
                     if (abs4 == nullptr) {
-                        cout << "file abs4.abst not found" << endl;
+                        cout << "file abst4.abst not found" << endl;
                         return;
                     }
 
-                    file = fopen("abs4.pdb", "r");
+                    file = fopen("abst4.pdb", "r");
                     if (file == nullptr) {
-                        cout << "file abs4.pdb not found" << endl;
+                        cout << "file abst4.pdb not found" << endl;
                         return;
                     }
                     map4 = read_state_map(file);
                     fclose(file);
 
-                    abs5 = read_abstraction_from_file("abs5.abst");
+                    abs5 = read_abstraction_from_file("abst5.abst");
                     if (abs5 == nullptr) {
-                        cout << "file abs5.abst not found" << endl;
+                        cout << "file abst5.abst not found" << endl;
                         return;
                     }
 
-                    file = fopen("abs5.pdb", "r");
+                    file = fopen("abst5.pdb", "r");
                     if (file == nullptr) {
-                        cout << "file abs5.pdb not found" << endl;
+                        cout << "file abst5.pdb not found" << endl;
                         return;
                     }
                     map5 = read_state_map(file);
