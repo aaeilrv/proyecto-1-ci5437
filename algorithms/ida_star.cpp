@@ -18,14 +18,16 @@
 
 using namespace std;
 
-pair<state_t*, int> f_bounded_dfs_visit(state_t &state, unsigned long int bound, int cost, int hist) {
+heuristics_t h;
+
+pair<state_t*, int> f_bounded_dfs_visit(state_t* state, unsigned long int bound, int cost, int hist) {
 
     // base cases
-    int f = cost + g.getHeuristic(state);
+    int f = cost + h.get_heuristic(state);
 
     if (f > bound) return make_pair(nullptr, f);
 
-    if (is_goal(&state)) {
+    if (is_goal(state)) {
         printf("goal reached");
         return make_pair(state, f);
     }
@@ -35,13 +37,13 @@ pair<state_t*, int> f_bounded_dfs_visit(state_t &state, unsigned long int bound,
     int rule_id;
     ruleid_iterator_t iter;
 
-    pair<state_t, int> p;
-    state_t m;
+    pair<state_t*,int>  p;
+    state_t *m;
 
-    init_fwd_iter(&iter, &state);
+    init_fwd_iter(&iter, state);
 
     while ((rule_id = next_ruleid(&iter)) >= 0) {
-        apply_fwd_rule(rule_id, &state, &m);
+        apply_fwd_rule(rule_id, state, m);
 
         int new_cost = cost + get_fwd_rule_cost(rule_id);
 
@@ -65,30 +67,36 @@ int main(int argc, char **argv) {
     */
     char state_str[MAX_STR_LEN + 1];
     ssize_t nchars;
-    state_t init_state;
-    unsigned long int bound = heuristic(init_state);
+    state_t* root;
+    heuristics_t h;
+    unsigned long int bound; // NO SE QUE ASIGNARLE AL BOUND !!!
 
-    // read
-    printf("enter init state: ");
-    if ( fgets(state_str, sizeof state_str, stdin) == NULL) {
-        printf("error: empty input line\n");
-        return 0;
-    }
+    h.init_heuristic("15_puzzle");
 
-    // convert string into state
-    if ((nchars = read_state(state_str, &init_state)) <= 0) {
-        printf("error: invalid state");
-        return 0;
-    }
+    for (int i = 0; i < 1; i++) {
 
-    // search with increasing f-value bounds
-    while (1) {
-        make_pair(state_t, unsigned long int) p = f_bounded_dfs_visit(root, bound, 0, init_history);
-
-        if (p.first != nullptr) {
-            return p.first;
+        // read
+        printf("enter init state: ");
+        if ( fgets(state_str, sizeof state_str, stdin) == NULL) {
+            printf("error: empty input line\n");
+            return 0;
         }
 
-        bound = p.second;
+        // convert string into state
+        if ((nchars = read_state(state_str, root)) <= 0) {
+            printf("error: invalid state");
+            return 0;
+        }
+
+        // search with increasing f-value bounds
+        while (1) {
+            pair<state_t*,int> p = f_bounded_dfs_visit(root, bound, 0, init_history);
+
+            if (p.first != nullptr) {
+                break;
+            }
+
+            bound = p.second;
+        }
     }
 }
