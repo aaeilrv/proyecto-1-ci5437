@@ -69,10 +69,10 @@ int main(int argc, char **argv) {
     ssize_t nchars;
     state_t init_state;
 
-    h.init_heuristic("hanoi4_12");
+    h.init_heuristic("topspin12_4");
     
     for (int i = 0; i < 10; i++) {
-        // read
+        // read state from std input
         if ( fgets(state_str, sizeof state_str, stdin) == NULL) {
             printf("error: empty input line\n");
             return 0;

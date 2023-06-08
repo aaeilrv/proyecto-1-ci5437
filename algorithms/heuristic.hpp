@@ -72,7 +72,7 @@ class heuristics_t {
                 /*
                     check for puzzles that have at least 3 abstractions
                 */
-                if (strcmp(problem, "15_puzzle")==0 || strcmp(problem, "24_puzzles")==0) {
+                if (strcmp(problem, "15_puzzle")==0 || strcmp(problem, "24_puzzles")==0 || strcmp(problem, "topspin12_4")==0) {
                     abs3 = read_abstraction_from_file("abst3.abst");
                     if (abs3 == nullptr) {
                         cout << "file abst3.abst not found" << endl;
@@ -122,7 +122,7 @@ class heuristics_t {
 
         int top_spin(state_t *state) {
             state_t *abs_state = new state_t;
-            int h1, h2;
+            int h1, h2, h3;
 
             abstract_state(abs1, state, abs_state);
             h1 = *state_map_get(map1, abs_state);
@@ -130,7 +130,10 @@ class heuristics_t {
             abstract_state(abs2, state, abs_state);
             h2 = *state_map_get(map2, abs_state);
 
-            return max(h1, h2);
+            abstract_state(abs3, state, abs_state);
+            h3 = *state_map_get(map3, abs_state);
+            
+            return max(h1, max(h2, h3));
         }
 
         int hanoi(state_t *state) {
