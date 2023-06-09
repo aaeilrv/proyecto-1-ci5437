@@ -20,61 +20,49 @@ using namespace std;
 
 heuristics_t h;
 
-pair<state_t*, int> f_bounded_dfs_visit(state_t* state, unsigned long int bound, int cost, int hist) {
-
+pair<state_t*, int> f_bounded_dfs_visit(state_t *state, unsigned long int bound, int cost, int hist) {
     // base cases
-    int f = cost + h.get_heuristic(state);
+    ruleid_iterator_t iter;
+    pair<state_t*,int>  p;
+    state_t child_state;
+    int t, f, rule_id, new_cost;
+
+    f = cost + h.get_heuristic(state);
 
     if (f > bound) return make_pair(nullptr, f);
 
     if (is_goal(state)) {
-        printf("goal reached");
+        printf("goal reached\n");
         return make_pair(state, f);
     }
 
-    int t = INT_MAX;
-
-    int rule_id;
-    ruleid_iterator_t iter;
-
-    pair<state_t*,int>  p;
-    state_t *m;
-
+    t = INT_MAX;
     init_fwd_iter(&iter, state);
 
     while ((rule_id = next_ruleid(&iter)) >= 0) {
-        apply_fwd_rule(rule_id, state, m);
+        apply_fwd_rule(rule_id, state, &child_state);
 
-        int new_cost = cost + get_fwd_rule_cost(rule_id);
+        new_cost = cost + get_fwd_rule_cost(rule_id);
 
-        p = f_bounded_dfs_visit(m, bound, new_cost, next_fwd_history(hist, rule_id));
+        p = f_bounded_dfs_visit(&child_state, bound, new_cost, next_fwd_history(hist, rule_id));
 
         if (p.first != nullptr) return p;
 
         t = min(t, p.second);
     }
 
-    free(m);
-
     return make_pair(nullptr, t);
-
 }
 
-
 int main(int argc, char **argv) {
-    /*
-        read input from std in and then, execute IDA* algorithm using PDBs
-    */
     char state_str[MAX_STR_LEN + 1];
     ssize_t nchars;
-    state_t* root = new state_t;
-    heuristics_t h;
+    state_t root;
+    unsigned long int bound;
 
-    //h.init_heuristic("15_puzzle");
+    h.init_heuristic("15_puzzle");
 
-    unsigned long int bound = h.get_heuristic(root);
-
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 10; i++) {
 
         // read
         printf("enter init state: ");
@@ -84,14 +72,16 @@ int main(int argc, char **argv) {
         }
 
         // convert string into state
-        if ((nchars = read_state(state_str, root)) <= 0) {
+        if ((nchars = read_state(state_str, &root)) <= 0) {
             printf("error: invalid state");
             return 0;
         }
 
+        bound = h.get_heuristic(&root);
+
         // search with increasing f-value bounds
         while (1) {
-            pair<state_t*,int> p = f_bounded_dfs_visit(root, bound, 0, init_history);
+            pair<state_t*,int> p = f_bounded_dfs_visit(&root, bound, 0, init_history);
 
             if (p.first != nullptr) {
                 break;
