@@ -67,11 +67,12 @@ int main(int argc, char **argv) {
     */
     char state_str[MAX_STR_LEN + 1];
     ssize_t nchars;
-    state_t* root;
+    state_t* root = new state_t;
     heuristics_t h;
-    unsigned long int bound; // NO SE QUE ASIGNARLE AL BOUND !!!
 
-    h.init_heuristic("15_puzzle");
+    //h.init_heuristic("15_puzzle");
+
+    unsigned long int bound = h.get_heuristic(root);
 
     for (int i = 0; i < 1; i++) {
 
