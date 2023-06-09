@@ -70,7 +70,7 @@ int main(int argc, char **argv) {
     ssize_t nchars;
     state_t init_state;
 
-    h.init_heuristic("15_puzzle");
+    h.init_heuristic("15_puzzle_manhattan");
     
     for (int i = 0; i < 10; i++) {
         // read state from std input

@@ -16,9 +16,11 @@
 using namespace std;
 
 class heuristics_t {
-    char *problem;
     abstraction_t *abs1, *abs2, *abs3, *abs4, *abs5;
     state_map_t *map1, *map2, *map3, *map4, *map5;
+    char *problem;
+    int rows_n_puzzle[16]; 
+    int columns_n_puzzle[16];
 
     public:
         heuristics_t() {};
@@ -107,6 +109,9 @@ class heuristics_t {
                     fclose(file);
                 }
 
+                /*
+                    check for puzzles that have 5 abstractions
+                */
                 if (strcmp(problem, "24_puzzle")==0){
                     abs5 = read_abstraction_from_file("abst5.abst");
                     if (abs5 == nullptr) {
@@ -121,6 +126,17 @@ class heuristics_t {
                     }
                     map5 = read_state_map(file);
                     fclose(file);
+                }
+            } else {
+                /*
+                    fill rows_n_puzzle and columns_n_puzzle arrays
+
+                    rows_n_puzzle[i] = row in the puzzle grid of the i-th number
+                    columns_n_puzzle[i] = colum in the puzzle grid of the i-th number
+                */
+                for (int i=0; i<16; i++) {
+                    rows_n_puzzle[i] = div(i, 4).quot;
+                    columns_n_puzzle[i] = i % 4;
                 }
             }
         }
@@ -144,6 +160,7 @@ class heuristics_t {
 
                 return max(max(h1, h2), max(h3, h4));
             }
+
             return max(h1, max(h2, h3));
         }
 
@@ -161,10 +178,25 @@ class heuristics_t {
         }
 
         int puzzle15_manhattan(state_t *state) {
-            /*
-                ver como mapear las posiciones con su estimado ajsjas
-            */
-            return 0;
+            var_t *values = state->vars;
+            int num_value, h, x, y, grid_size;
+
+            grid_size = 16;
+            h = 0;
+            x = -1;
+
+            for (int i=0; i<grid_size; i++) {
+                if ((char)values[i] != 'B') continue;
+                num_value = (int)values[i];
+
+                y = i % grid_size;
+                if (y % grid_size == 0){
+                    x++;
+                }
+
+                h += abs(x-rows_n_puzzle[num_value]) + abs(y-columns_n_puzzle[num_value]);
+            }
+            return h;
         }
         
         int puzzle15(state_t *state) {
@@ -197,11 +229,11 @@ class heuristics_t {
             h3 = *state_map_get(map3, abs_state);
 
             abstract_state(abs4, state, abs_state);
-            h4 = *state_map_get(map3, abs_state);
+            h4 = *state_map_get(map4, abs_state);
 
             abstract_state(abs5, state, abs_state);
-            h5 = *state_map_get(map3, abs_state);
-            
+            h5 = *state_map_get(map5, abs_state);
+
             return h1+h2+h3+h4+h5;
         }
 
