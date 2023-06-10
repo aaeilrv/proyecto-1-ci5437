@@ -41,7 +41,7 @@ pair<state_t*, int> f_bounded_dfs_visit(state_t* state, unsigned long int bound,
     if (f > bound) return make_pair(nullptr, f);
 
     if (is_goal(state)) {
-        printf("goal reached at depth: %ld - nodes generated: BLA\n", bound);
+        printf("goal reached at depth: %ld - nodes generated: TO DO\n", bound);
         return make_pair(state, f);
     }
 
@@ -68,7 +68,7 @@ pair<state_t*, int> f_bounded_dfs_visit(state_t* state, unsigned long int bound,
     return make_pair(nullptr, t);
 }
 
-/*int ida_search(state_t root) {
+/* state_t ida_search(state_t root) {
     unsigned long int bound;
     bound = h.get_heuristic(&root);
 
@@ -77,7 +77,7 @@ pair<state_t*, int> f_bounded_dfs_visit(state_t* state, unsigned long int bound,
         pair<state_t*,int> p = f_bounded_dfs_visit(&root, bound, 0, init_history);
 
         if (p.first != nullptr) {
-            break;
+            return p.first
         }
 
         bound = p.second;
