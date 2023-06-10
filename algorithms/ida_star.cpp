@@ -20,29 +20,43 @@ using namespace std;
 
 heuristics_t h;
 
-pair<state_t*, int> f_bounded_dfs_visit(state_t *state, unsigned long int bound, int cost, int hist) {
-    // base cases
+/*char* puzzle_name(char** argv) {
+    char puzzle_name[100];
+    char* token = strtok(argv[0], "/");
+
+    strcpy(puzzle_name, strtok(NULL, "."));
+
+    return puzzle_name;
+}*/
+
+pair<state_t*, int> f_bounded_dfs_visit(state_t* state, unsigned long int bound, int cost, int hist) {
     ruleid_iterator_t iter;
     pair<state_t*,int>  p;
     state_t child_state;
     int t, f, rule_id, new_cost;
+    unsigned long int n_nodes;
 
     f = cost + h.get_heuristic(state);
 
     if (f > bound) return make_pair(nullptr, f);
 
     if (is_goal(state)) {
-        printf("goal reached\n");
+        printf("goal reached at depth: %ld - nodes generated: BLA\n", bound);
         return make_pair(state, f);
     }
 
     t = INT_MAX;
     init_fwd_iter(&iter, state);
 
+    // Iterar por nodo hijo del estado actual
     while ((rule_id = next_ruleid(&iter)) >= 0) {
+    
         apply_fwd_rule(rule_id, state, &child_state);
 
         new_cost = cost + get_fwd_rule_cost(rule_id);
+
+        // no visitar estados que ya fueron visitadores
+        if (!fwd_rule_valid_for_history(hist, rule_id)) continue;
 
         p = f_bounded_dfs_visit(&child_state, bound, new_cost, next_fwd_history(hist, rule_id));
 
@@ -60,12 +74,18 @@ int main(int argc, char **argv) {
     state_t root;
     unsigned long int bound;
 
-    h.init_heuristic("15_puzzle");
+    // put inside function
+    char puzzle_name[100];
+    char* token = strtok(argv[0], "/");
+
+    strcpy(puzzle_name, strtok(NULL, "."));
+    //
+
+    h.init_heuristic(puzzle_name);
 
     for (int i = 0; i < 10; i++) {
 
         // read
-        printf("enter init state: ");
         if ( fgets(state_str, sizeof state_str, stdin) == NULL) {
             printf("error: empty input line\n");
             return 0;
