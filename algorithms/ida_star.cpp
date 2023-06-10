@@ -68,6 +68,22 @@ pair<state_t*, int> f_bounded_dfs_visit(state_t* state, unsigned long int bound,
     return make_pair(nullptr, t);
 }
 
+/*int ida_search(state_t root) {
+    unsigned long int bound;
+    bound = h.get_heuristic(&root);
+
+    // search with increasing f-value bounds
+    while (1) {
+        pair<state_t*,int> p = f_bounded_dfs_visit(&root, bound, 0, init_history);
+
+        if (p.first != nullptr) {
+            break;
+        }
+
+        bound = p.second;
+    }
+}*/
+
 int main(int argc, char **argv) {
     char state_str[MAX_STR_LEN + 1];
     ssize_t nchars;
@@ -100,6 +116,9 @@ int main(int argc, char **argv) {
         bound = h.get_heuristic(&root);
 
         // search with increasing f-value bounds
+
+        /*ida_search(root);*/
+
         while (1) {
             pair<state_t*,int> p = f_bounded_dfs_visit(&root, bound, 0, init_history);
 
