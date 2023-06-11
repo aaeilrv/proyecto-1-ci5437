@@ -85,7 +85,6 @@ int main(int argc, char **argv) {
     state_t root;
     unsigned long int bound;
     unsigned long int n_nodes;
-
     char* puzzle = puzzle_name(argv[0]);
 
     h.init_heuristic(puzzle);
