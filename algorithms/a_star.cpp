@@ -9,6 +9,7 @@
 #include <sys/time.h>
 #include "priority_queue.hpp"
 #include "heuristic.hpp"
+#include "util.hpp"
 #define MAX_STR_LEN 999
 using namespace std;
 
@@ -66,11 +67,15 @@ void a_star(state_t *state) {
 }
 
 int main(int argc, char **argv) {
-    char state_str[MAX_STR_LEN+1];
+    char state_str[MAX_STR_LEN+1], *puzzle;
     ssize_t nchars;
     state_t init_state;
 
-    h.init_heuristic("15_puzzle_manhattan");
+    puzzle = puzzle_name(argv[0]);
+    
+    printf("puzzle name: %s\n", puzzle);
+    
+    h.init_heuristic(puzzle);
     
     for (int i = 0; i < 10; i++) {
         // read state from std input

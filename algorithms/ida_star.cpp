@@ -80,13 +80,14 @@ pair<state_t*, int> f_bounded_dfs_visit(state_t* state, unsigned long int bound,
 }*/
 
 int main(int argc, char **argv) {
-    char state_str[MAX_STR_LEN + 1];
+    char state_str[MAX_STR_LEN + 1], *puzzle;
     ssize_t nchars;
     state_t root;
     unsigned long int bound;
     unsigned long int n_nodes;
-    char* puzzle = puzzle_name(argv[0]);
 
+    puzzle = puzzle_name(argv[0]);
+    printf("puzzle name: %s\n", puzzle);
     h.init_heuristic(puzzle);
 
     for (int i = 0; i < 10; i++) {

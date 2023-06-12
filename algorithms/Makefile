@@ -16,6 +16,10 @@ psvn2c_abstraction.c:
 	../bin/psvn2c $(PSVNOPT) --name=$(*F) < $< > $@
 	rm -f ./psvn2c_core.c ./psvn2c_state_map.c ./psvn2c_abstraction.c
 
+15_puzzle_manhattan.c: ../puzzles/15_puzzle.psvn psvn2c_core.c psvn2c_state_map.c psvn2c_abstraction.c
+	../bin/psvn2c $(PSVNOPT) --name=$(*F) < $< > $@
+	rm -f ./psvn2c_core.c ./psvn2c_state_map.c ./psvn2c_abstraction.c
+
 abst1.c: ./abst1.psvn psvn2c_core.c psvn2c_state_map.c psvn2c_abstraction.c
 	../bin/psvn2c $(PSVNOPT) --name=$(*F) < $< > $@
 	rm -f ./psvn2c_core.c ./psvn2c_state_map.c ./psvn2c_abstraction.c
@@ -89,7 +93,11 @@ abstractor:
 	@./abst3.distSummary abst3.pdb
 
 	$(CXX) $(OPT) ../algorithms/a_star.cpp -include $< -o $@
-	@rm -f *.distSummary 
+	@rm -f *.distSummary abstractor 
+
+15_puzzle_manhattan.a_star: 15_puzzle_manhattan.c
+	$(CXX) $(OPT) ../algorithms/a_star.cpp -include $< -o $@
+	@rm -f *.c
 
 24_puzzle.a_star: 24_puzzle.c abstractor
 	@cp ../puzzles/24_puzzle.psvn ./24_puzzle.psvn
@@ -121,7 +129,7 @@ abstractor:
 	@./abst5.distSummary abst5.pdb
 
 	$(CXX) $(OPT) ../algorithms/a_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 topspin12_4.a_star: topspin12_4.c abstractor 
 	@cp ../puzzles/topspin12_4.psvn ./topspin12_4.psvn
@@ -143,7 +151,7 @@ topspin12_4.a_star: topspin12_4.c abstractor
 	@./abst3.distSummary abst3.pdb
 	
 	$(CXX) $(OPT) ../algorithms/a_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 topspin14_4.a_star: topspin14_4.c abstractor 
 	@cp ../puzzles/topspin14_4.psvn ./topspin14_4.psvn
@@ -170,7 +178,7 @@ topspin14_4.a_star: topspin14_4.c abstractor
 	@./abst4.distSummary abst4.pdb	
 
 	$(CXX) $(OPT) ../algorithms/a_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 topspin17_4.a_star: topspin17_4.c abstractor 
 	@cp ../puzzles/topspin17_4.psvn ./topspin17_4.psvn
@@ -192,7 +200,7 @@ topspin17_4.a_star: topspin17_4.c abstractor
 	@./abst3.distSummary abst3.pdb
 
 	$(CXX) $(OPT) ../algorithms/a_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 hanoi4_12.a_star: hanoi4_12.c abstractor 
 	@cp ../puzzles/hanoi4_12.psvn ./hanoi4_12.psvn
@@ -209,7 +217,7 @@ hanoi4_12.a_star: hanoi4_12.c abstractor
 	@./abst2.distSummary abst2.pdb
 
 	$(CXX) $(OPT) ../algorithms/a_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 hanoi4_14.a_star: hanoi4_14.c abstractor 
 	@cp ../puzzles/hanoi4_14.psvn ./hanoi4_14.psvn
@@ -226,7 +234,7 @@ hanoi4_14.a_star: hanoi4_14.c abstractor
 	@./abst2.distSummary abst2.pdb
 
 	$(CXX) $(OPT) ../algorithms/a_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 hanoi4_17.a_star: hanoi4_17.c abstractor 
 	@cp ../puzzles/hanoi4_17.psvn ./hanoi4_17.psvn
@@ -243,7 +251,7 @@ hanoi4_17.a_star: hanoi4_17.c abstractor
 	@./abst2.distSummary abst2.pdb
 
 	$(CXX) $(OPT) ../algorithms/a_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 rubik3.a_star: rubik3.c abstractor 
 	@cp ../puzzles/rubik3.psvn ./rubik3.psvn
@@ -260,7 +268,7 @@ rubik3.a_star: rubik3.c abstractor
 	@./abst2.distSummary abst2.pdb
 
 	$(CXX) $(OPT) ../algorithms/a_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 ######################################################################################################
 # IDA*
@@ -285,7 +293,12 @@ rubik3.a_star: rubik3.c abstractor
 	@./abst3.distSummary abst3.pdb
 
 	$(CXX) $(OPT) ../algorithms/ida_star.cpp -include $< -o $@
-	@rm -f *.distSummary
+	@rm -f *.distSummary abstractor
+
+15_puzzle_manhattan.ida_star: 15_puzzle_manhattan.c
+
+	$(CXX) $(OPT) ../algorithms/ida_star.cpp -include $< -o $@
+	@rm -f *.c
 
 24_puzzle.ida_star: 24_puzzle.c abstractor
 	@cp ../puzzles/24_puzzle.psvn ./24_puzzle.psvn
@@ -317,7 +330,7 @@ rubik3.a_star: rubik3.c abstractor
 	@./abst5.distSummary abst5.pdb
 
 	$(CXX) $(OPT) ../algorithms/ida_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 topspin12_4.ida_star: topspin12_4.c abstractor 
 	@cp ../puzzles/topspin12_4.psvn ./topspin12_4.psvn
@@ -339,7 +352,7 @@ topspin12_4.ida_star: topspin12_4.c abstractor
 	@./abst3.distSummary abst3.pdb
 	
 	$(CXX) $(OPT) ../algorithms/ida_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 topspin14_4.ida_star: topspin14_4.c abstractor 
 	@cp ../puzzles/topspin14_4.psvn ./topspin14_4.psvn
@@ -366,7 +379,7 @@ topspin14_4.ida_star: topspin14_4.c abstractor
 	@./abst4.distSummary abst4.pdb	
 
 	$(CXX) $(OPT) ../algorithms/ida_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 topspin17_4.ida_star: topspin17_4.c abstractor 
 	@cp ../puzzles/topspin17_4.psvn ./topspin17_4.psvn
@@ -388,7 +401,7 @@ topspin17_4.ida_star: topspin17_4.c abstractor
 	@./abst3.distSummary abst3.pdb
 
 	$(CXX) $(OPT) ../algorithms/ida_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 hanoi4_12.ida_star: hanoi4_12.c abstractor 
 	@cp ../puzzles/hanoi4_12.psvn ./hanoi4_12.psvn
@@ -405,7 +418,7 @@ hanoi4_12.ida_star: hanoi4_12.c abstractor
 	@./abst2.distSummary abst2.pdb
 
 	$(CXX) $(OPT) ../algorithms/ida_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 hanoi4_14.ida_star: hanoi4_14.c abstractor 
 	@cp ../puzzles/hanoi4_14.psvn ./hanoi4_14.psvn
@@ -422,7 +435,7 @@ hanoi4_14.ida_star: hanoi4_14.c abstractor
 	@./abst2.distSummary abst2.pdb
 
 	$(CXX) $(OPT) ../algorithms/ida_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 hanoi4_17.ida_star: hanoi4_17.c abstractor 
 	@cp ../puzzles/hanoi4_17.psvn ./hanoi4_17.psvn
@@ -439,7 +452,7 @@ hanoi4_17.ida_star: hanoi4_17.c abstractor
 	@./abst2.distSummary abst2.pdb
 
 	$(CXX) $(OPT) ../algorithms/ida_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 rubik3.ida_star: rubik3.c abstractor 
 	@cp ../puzzles/rubik3.psvn ./rubik3.psvn
@@ -456,7 +469,7 @@ rubik3.ida_star: rubik3.c abstractor
 	@./abst2.distSummary abst2.pdb
 
 	$(CXX) $(OPT) ../algorithms/ida_star.cpp -include $< -o $@
-	@rm -f *.distSummary *.psvn *.txt *.c
+	@rm -f *.distSummary abstractor *.psvn *.txt *.c
 
 .PHONY: clean
 clean:
