@@ -15,7 +15,7 @@ using namespace std;
 
 heuristics_t h;
 
-void a_star(state_t *state) {
+void a_star(state_t* state) {
     PriorityQueue<state_t> p;
     ruleid_iterator_t iter;
     state_map_t *visited;
@@ -23,7 +23,7 @@ void a_star(state_t *state) {
     unsigned long int n_nodes;
     int priority, ruleid, *curr_cost, h_value;
     
-    p.Add(0, 0, *state);
+    p.Add(h.get_heuristic(state), 0, *state);
     
     visited = new_state_map();
     state_map_add(visited, state, 0); // we already visit the initial state
@@ -31,8 +31,9 @@ void a_star(state_t *state) {
     n_nodes = 0;
     
     while (!p.Empty()) {
-        priority = p.CurrentPriority();
         curr_state = p.Top();
+        
+        priority = p.CurrentPriority() - h.get_heuristic(&curr_state);
         p.Pop();
 
         n_nodes++;
