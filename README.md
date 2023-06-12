@@ -57,5 +57,3 @@ y poder ejecutarlo. Se deben generar casos de prueba f&aacute;ciles y dif&iacute
 Deben entregar su implementación de la solución junto a un informe que explique las decisiones tomadas y los resultados de sus ejecuciones.
 
 Cualquier trabajo extra (heurísticas o algoritmos extra implementados, otros métodos de eliminación de duplicados, etc...) contará para los puntos de participación.
-
-
