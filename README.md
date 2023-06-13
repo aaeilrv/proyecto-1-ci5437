@@ -1,3 +1,8 @@
+# Proyecto I CI-5437
+
+Daniel Robayo 18-11086
+Valeria Vera 16-11233
+
 # Objetivo
 
 El objetivo del proyecto es aprender sobre el modelo de espacio de estados y sobre
@@ -59,10 +64,7 @@ Deben entregar su implementación de la solución junto a un informe que expliqu
 Cualquier trabajo extra (heurísticas o algoritmos extra implementados, otros métodos de eliminación de duplicados, etc...) contará para los puntos de participación.
 
 - - - - -
-Daniel Robayo 18-11086
-Valeria Vera 16-11233
 
-**Proyecto I CI-5437**
 ## Estructura del directorio
 Los archivos se encuentran ordenados de la siguiente manera:
 - puzzles: contiene los archivos .psvn de cada uno de los puzzles con los que se correrán los algoritmos
