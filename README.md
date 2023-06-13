@@ -64,28 +64,28 @@ Cualquier trabajo extra (heurísticas o algoritmos extra implementados, otros m�
 
 - - - - -
 
-## Estructura del directorio
+## ESTRUCTURA DEL DIRECTORIO
 Los archivos se encuentran ordenados de la siguiente manera:
-- puzzles: contiene los archivos .psvn de cada uno de los puzzles con los que se correrán los algoritmos
+- puzzles: contiene los archivos .psvn de cada uno de los puzzles con los que se correrán los algoritmos.
 - algorithms: posee todos los algoritmos creados y el **Makefile** para ejecutar los algoritmos informados.
 - abstractions: alberga las abstracciones realizadas para los puzzles. Dentro se encontrarán distintas carpetas, una por cada puzzle, en las que estarán las abstracciones de cada uno de ellos.
-- search_tree: directorio que incluye el **Makefile** para ejecutar los árboles de búsqueda
+- search_tree: directorio que incluye el **Makefile** para ejecutar los árboles de búsqueda.
 
 ## COMPILACIÓN Y EJECUCIÓN
 
 En primera instancia, se debe correr el comando ```make /bin/psvn2c``` en el directorio principal del proyecto.
 
-#### PARA ÁRBOLES DE BÚSQUEDA
-Diríjase al directorio **search_tree* y ejecute los comandos ```make [puzzle_name].from_goal_no_pruning``` o ```make [puzzle_name].from_goal_pruning``` según sea el caso.
+### PARA ÁRBOLES DE BÚSQUEDA
+Diríjase al directorio **search_tree** y ejecute los comandos ```make [puzzle_name].from_goal_no_pruning``` o ```make [puzzle_name].from_goal_pruning``` según sea el caso.
 
 A continuación, corra mediante línea de comandos ```./[puzzle_name].from_goal_no_pruning``` o ```./[puzzle_name].from_goal_pruning``` según corresponda.
 
-EJEMPLOs:
+Ejemplos:
 ```./15_puzzle.from_goal_no_pruning```
 ```./hanoi4_12.from_goal_pruning```
 
-#### PARA ALGORITMOS INFORMADOS
-Diríjase al directorio **algorithms* y escriba mediante la línea de comandos ```make [puzzle_name].a_star``` o ```make [puzzle_name].ida_star``` según sea el caso.
+### PARA ALGORITMOS INFORMADOS
+Diríjase al directorio **algorithms** y escriba mediante la línea de comandos ```make [puzzle_name].a_star``` o ```make [puzzle_name].ida_star``` según sea el caso.
 En caso de querer correr 15-puzzle con heurística Manhattan, deberá escribir ```make 15_puzzle_manhattan.a_star``` o ```make 15_puzzle_manhattan.ida_star```.
 
 Luego, ejecute ```./[puzzle_name].a_star < [benchmark path]``` o ```./[puzzle_name].ida_star < [benchmark path]```.
