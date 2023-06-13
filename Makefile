@@ -4,7 +4,7 @@ CXX = g++
 OPT = -g -Wall -O3
 
 
-psvn2c: src/psvn2c.cpp src/psvn2c.hpp src/psvn.cpp src/psvn.hpp
+bin/psvn2c: src/psvn2c.cpp src/psvn2c.hpp src/psvn.cpp src/psvn.hpp
 	$(CXX) $(OPT) src/psvn2c.cpp src/psvn.cpp -o $@
 
 clean:

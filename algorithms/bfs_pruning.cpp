@@ -50,7 +50,9 @@ void bread_first_search(state_t *state) {
             }
         }
         
-        printf("depth %d - nodes generated: %ld - branch factor %.2f\n", curr_depth, n_child_at_depth, (float)n_child/n_child_at_depth);
+        //printf("depth %d - nodes generated: %ld - branch factor %.2f\n", curr_depth, n_child_at_depth, (float)n_child/n_child_at_depth);
+        printf("%ld\n", n_child_at_depth);
+        
         curr_depth++;
     }
 }
