@@ -57,3 +57,40 @@ y poder ejecutarlo. Se deben generar casos de prueba f&aacute;ciles y dif&iacute
 Deben entregar su implementación de la solución junto a un informe que explique las decisiones tomadas y los resultados de sus ejecuciones.
 
 Cualquier trabajo extra (heurísticas o algoritmos extra implementados, otros métodos de eliminación de duplicados, etc...) contará para los puntos de participación.
+
+- - - - -
+Daniel Robayo 18-11086
+Valeria Vera 16-11233
+
+**Proyecto I CI-5437**
+## Estructura del directorio
+Los archivos se encuentran ordenados de la siguiente manera:
+- puzzles: contiene los archivos .psvn de cada uno de los puzzles con los que se correrán los algoritmos
+- algorithms: posee todos los algoritmos creados y el **Makefile** para ejecutar los algoritmos informados.
+- abstractions: alberga las abstracciones realizadas para los puzzles. Dentro se encontrarán distintas carpetas, una por cada puzzle, en las que estarán las abstracciones de cada uno de ellos.
+- search_tree: directorio que incluye el **Makefile** para ejecutar los árboles de búsqueda
+
+## COMPILACIÓN Y EJECUCIÓN
+
+En primera instancia, se debe correr el comando ```make /bin/psvn2c``` en el directorio principal del proyecto.
+
+#### PARA ÁRBOLES DE BÚSQUEDA
+Diríjase al directorio **search_tree* y ejecute los comandos ```make [puzzle_name].from_goal_no_pruning``` o ```make [puzzle_name].from_goal_pruning``` según sea el caso.
+
+A continuación, corra mediante línea de comandos ```./[puzzle_name].from_goal_no_pruning``` o ```./[puzzle_name].from_goal_pruning``` según corresponda.
+
+EJEMPLOs:
+```./15_puzzle.from_goal_no_pruning```
+```./hanoi4_12.from_goal_pruning```
+
+#### PARA ALGORITMOS INFORMADOS
+Diríjase al directorio **algorithms* y escriba mediante la línea de comandos ```make [puzzle_name].a_star``` o ```make [puzzle_name].ida_star``` según sea el caso.
+En caso de querer correr 15-puzzle con heurística Manhattan, deberá escribir ```make 15_puzzle_manhattan.a_star``` o ```make 15_puzzle_manhattan.ida_star```.
+
+Luego, ejecute ```./[puzzle_name].a_star < [benchmark path]``` o ```./[puzzle_name].ida_star < [benchmark path]```.
+
+Ejemplos:
+```./15_puzzle_manhattan.a_star < ../benchmarks/15-puzzle/15_puzzle.d\=010```
+```./topspin12_4.ida_star < ../benchmarks/topspin_12_4/topspin_12_4d.d\=100```
+
+**Nota:** Los archivos deben tener el mismo nombre que aquellos en el directorio **puzzle** para poder ejecutarse correctamente.
